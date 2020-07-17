@@ -38,11 +38,12 @@ RSpec.describe Admin::Roles::PermissionsController, type: :request do
 
     context 'Save and Continue button pressed with new permission changes' do
       subject { patch admin_roles_permission_path(firm.id), params: params.merge(submit_button) }
+      let(:permission2) { create :permission, :non_passported }
       let(:submit_button) { { continue_button: 'Save and Continue' } }
       let(:params) do
         {
           firm: {
-            permission_ids: %w[87752110-c00e-4372-8be5-e1d10755c622 19a8d08c-5f91-4cd0-b8ab-8332a5162b1f]
+            permission_ids: permission2.id
           }
         }
       end
@@ -50,6 +51,9 @@ RSpec.describe Admin::Roles::PermissionsController, type: :request do
       it 'saves new permissions and redirects to next page' do
         # TODO: Broken Test
         # subject
+        ap firm.permissions.count
+        ap params
+        subject
         expect { subject }.to change { firm.permissions.count }.by(1)
       end
     end
