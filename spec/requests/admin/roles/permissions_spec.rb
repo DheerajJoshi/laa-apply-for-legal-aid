@@ -41,22 +41,17 @@ RSpec.describe Admin::Roles::PermissionsController, type: :request do
       let(:submit_button) { { continue_button: 'Save and Continue' } }
       let(:params) do
         {
-            firm:  {
-              :permission_ids => ["87752110-c00e-4372-8be5-e1d10755c622", "19a8d08c-5f91-4cd0-b8ab-8332a5162b1f",]
-            }
+          firm: {
+            permission_ids: %w[87752110-c00e-4372-8be5-e1d10755c622 19a8d08c-5f91-4cd0-b8ab-8332a5162b1f]
+          }
         }
       end
 
       it 'saves new permissions and redirects to next page' do
-        # ap 11111
-        # ap firm.permissions.count
+        # TODO: Broken Test
         # subject
-        # ap 22222
-        # ap firm.permissions
-        # ap firm.permissions.count
-        expect{subject}.to change{firm.permissions.count}.by(1)
+        expect { subject }.to change { firm.permissions.count }.by(1)
       end
     end
   end
 end
-
